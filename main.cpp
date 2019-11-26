@@ -14,7 +14,7 @@
 #endif
 
 int main(int argc, char *argv[]) {
-    const int ELEMENTS = 30; const int DEGREE = 3;
+    const int ELEMENTS = 30; const int DEGREE = 5;
     BTree<int> bTree(DEGREE);
     std::vector<int> elements;
 
@@ -34,13 +34,13 @@ int main(int argc, char *argv[]) {
         ASSERT(bTree.find(i) == findInVec, "There is a problem with the remove or find");
         ASSERT(!bTree.find(i), "There is a problem with the remove or find");
         std::cout << "In my tree    : "; bTree.print();
-        std::cout << "In the vector : ";  for (auto && item: elements){ std:: cout << item << " "; }
+        std::cout << "In the vector : "; for (auto && item: elements){ std:: cout << item << " "; }
         std::cout << std:: endl << std::endl;
     }
 
-//    std::cout << "==========================================================" << std:: endl;
-//    std::cout << "                      All test passed                     " << std:: endl;
-//    std::cout << "==========================================================" << std:: endl;
+    std::cout << "==========================================================" << std:: endl;
+    std::cout << "                      All test passed                     " << std:: endl;
+    std::cout << "==========================================================" << std:: endl;
 
     return EXIT_SUCCESS;
 }

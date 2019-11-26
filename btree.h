@@ -18,26 +18,26 @@ class BTree {
         }
 
         bool insert(T data) { // TO DO
-            if (this->find(data)) { return false; }
+            if (this->find(data)) { return false; } /* To avoid repeated elements */
 
             /* If tree is empty */
             if (!this->root) {
                 this->root = new Node<T>(this->degree);
                 this->root->keys[0] = data; /* Insert key */
-                this->root->size = 1;
+                this->root->nKey = 1;
             }
 
             /* If root is full */
-            else if(this->root->size == this->degree - 1){
-                auto newRoot = new Node<T>(this->degree, false);
-                newRoot->children[0] = this->root;
-                newRoot->splitChild(0, this->root);
+            else if(this->root->nKey == this->degree - 1){
+                auto newNode = new Node<T>(this->degree, false);
+                newNode->children[0] = this->root;
+                newNode->splitChild(0, this->root);
 
                 int i = 0;
-                if (newRoot->keys[0] < data) { ++i; }
-                newRoot->children[i]->insert(data);
+                if (newNode->keys[0] < data) { ++i; }
+                newNode->children[i]->insert(data);
 
-                this->root = newRoot;
+                this->root = newNode;
             }
 
             /* If root is not full */
@@ -49,14 +49,13 @@ class BTree {
         }
 
         bool remove(T k) {
-            if(!this->find(k)){ return false; }
+            if(!this->find(k)){ return false; } /* If the element is not in the tree */
 
             this->root->remove(k);
 
-            if(this->root->size == 0){
+            if(this->root->nKey == 0){
                 auto oldNode = this->root;
                 this->root = this->root->isLeaf ? nullptr : this->root->children[0];
-//                delete oldNode;
             }
 
             return true;
