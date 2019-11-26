@@ -24,11 +24,11 @@ class BTree {
             if (!this->root) {
                 this->root = new Node<T>(this->degree);
                 this->root->keys[0] = data; /* Insert key */
-                this->root->currentNumberOfKeys = 1;
+                this->root->size = 1;
             }
 
             /* If root is full */
-            else if (this->root->currentNumberOfKeys == this->degree - 1) {
+            else if(this->root->size == this->degree - 1){
                 auto newRoot = new Node<T>(this->degree, false);
                 newRoot->children[0] = this->root;
                 newRoot->splitChild(0, this->root);
@@ -48,8 +48,18 @@ class BTree {
             return true;
         }
 
-        bool remove(T k) { // TO DO
+        bool remove(T k) {
+            if(!this->find(k)){ return false; }
 
+            this->root->remove(k);
+
+            if(this->root->size == 0){
+                auto oldNode = this->root;
+                this->root = this->root->isLeaf ? nullptr : this->root->children[0];
+//                delete oldNode;
+            }
+
+            return true;
         }
 
         void print() { // TO DO
