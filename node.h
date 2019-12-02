@@ -185,7 +185,7 @@ public:
         }
 
 
-        bool search(T data){
+        bool find(T data){
             int i = 0;
 
             while(i < this->nKey && data > this->keys[i]) {
@@ -198,7 +198,7 @@ public:
                 return false;
             }
 
-            return this->children[i]->search(data);
+            return this->children[i]->find(data);
         }
 
         /*
@@ -207,7 +207,7 @@ public:
          */
         //virtual bool isLeaf() = 0;
 
-        void insert(T data){
+        void insertNonFull(T data){
             int index = this->nKey;
             if(this->isLeaf){
                 while(index > 0 && data < this->keys[index - 1]){
@@ -230,7 +230,7 @@ public:
                     }
                 }
 
-                this->children[index]->insert(data);
+                this->children[index]->insertNonFull(data);
             }
         }
 

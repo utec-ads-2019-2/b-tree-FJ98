@@ -18,15 +18,15 @@ int main(int argc, char *argv[]) {
     BTree<int> bTree(DEGREE);
     std::vector<int> elements;
 
+    std::cout << "====================================Testing Insert============================================\n\n";
     for(int i = 0; i < ELEMENTS; ++i) {
         bTree.insert(i);
         elements.push_back(i);
     }
-
     std::cout << "Original tree    : "; bTree.print();
     std::cout << "Original vector  : "; for (auto && item: elements){ std:: cout << item << " ";} std::cout << std::endl;
 
-    std::cout << "\nTesting Remove" << std::endl;
+    std::cout << "\n====================================Testing Remove============================================\n\n";
     for(int i = 0; i < ELEMENTS; ++i) {
         elements.erase(elements.begin());
         bTree.remove(i);

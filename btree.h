@@ -14,7 +14,7 @@ class BTree {
 
         bool find(T data) { // TO DO
             if (!this->root) { return false; }
-            return this->root->search(data);
+            return this->root->find(data);
         }
 
         bool insert(T data) { // TO DO
@@ -35,14 +35,14 @@ class BTree {
 
                 int i = 0;
                 if (newNode->keys[0] < data) { ++i; }
-                newNode->children[i]->insert(data);
+                newNode->children[i]->insertNonFull(data);
 
                 this->root = newNode;
             }
 
             /* If root is not full */
             else {
-                this->root->insert(data);
+                this->root->insertNonFull(data);
             }
 
             return true;
